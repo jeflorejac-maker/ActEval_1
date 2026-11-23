@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora</title>
+</head>
+<body>
+  <h2>Calculadora (-99999 a 99999)</h2>
+
+  <input type="number" id="n1" min="-99999" max="99999" step="1" placeholder="Número 1">
+
+  <select id="op">
+    <option value="+">Suma (+)</option>
+    <option value="-">Resta (-)</option>
+    <option value="*">Multiplicación (*)</option>
+    <option value="^">Potencia (^)</option>
+  </select>
+
+  <input type="number" id="n2" min="-99999" max="99999" step="1" placeholder="Número 2">
+
+  <button onclick="calcular()">Calcular</button>
+
+  <p id="res"></p>
+
+  <script>
+    function fueraDeRango(num) {
+      return !Number.isInteger(num) || num < -99999 || num > 99999;
+    }
+
+    function calcular() {
+      const a = Number(document.getElementById("n1").value);
+      const b = Number(document.getElementById("n2").value);
+      const op = document.getElementById("op").value;
+      const res = document.getElementById("res");
+
+      if (fueraDeRango(a) || fueraDeRango(b)) {
+        res.textContent = "Error: escribe enteros entre -99999 y 99999.";
+        return;
+      }
+
+      if (op === "+") res.textContent = "Resultado: " + (a + b);
+      else if (op === "-") res.textContent = "Resultado: " + (a - b);
+      else if (op === "*") res.textContent = "Resultado: " + (a * b);
+      else if (op === "^") res.textContent = "Resultado: " + (a ** b);
+    }
+  </script>
+</body>
+</html>
